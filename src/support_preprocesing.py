@@ -699,7 +699,7 @@ def one_hot_encoding(dataframe, columns):
 
     # Eliminar las columnas originales
     dataframe.drop(columns=columns, inplace=True)
-    encoder_path="../encoders/one_hot_encoder.pkl"
+    encoder_path="../transformers/one_hot_encoder.pkl"
     # Guardar el encoder en un archivo .pkl
     with open(encoder_path, 'wb') as file:
         pickle.dump(one_hot_encoder, file)
@@ -723,7 +723,7 @@ def ordinal_encoding(dataframe, columns, categories):
 
     # Codificar las columnas
     dataframe[columns] = ordinal_encoder.fit_transform(dataframe[columns])
-    encoder_path="../encoders/ordinal_encoder.pkl"
+    encoder_path="../transformers/ordinal_encoder.pkl"
     # Guardar el encoder en un archivo .pkl
     with open(encoder_path, 'wb') as file:
         pickle.dump(ordinal_encoder, file)
@@ -751,7 +751,7 @@ def label_encoding(dataframe, columns):
         label_encoder = LabelEncoder()
         dataframe[col] = label_encoder.fit_transform(dataframe[col])
         label_encoders[col] = label_encoder  # Guardar el encoder para esta columna
-    encoder_path="../encoders/label_encoders.pkl"
+    encoder_path="../transformers/label_encoders.pkl"
     # Guardar los LabelEncoders en un archivo .pkl
     with open(encoder_path, 'wb') as file:
         pickle.dump(label_encoders, file)
@@ -783,7 +783,7 @@ def target_encoding(dataframe, columns, target):
 
     # Codificar las columnas
     dataframe[columns] = target_encoder.fit_transform(dataframe[columns], dataframe[target])
-    encoder_path="../encoders/target_encoding.pkl"
+    encoder_path="../transformers/target_encoding.pkl"
     # Guardar el encoder en un archivo .pkl
     with open(encoder_path, 'wb') as file:
         pickle.dump(target_encoder, file)
@@ -811,7 +811,7 @@ def frequency_encoding(dataframe, columns):
         freq_map = dataframe[col].value_counts(normalize=True)
         freq_mappings[col] = freq_map  # Guardar el mapeo
         dataframe[col] = dataframe[col].map(freq_map)
-    encoder_path="../encoders/freq_mappings.pkl"
+    encoder_path="../transformers/freq_mappings.pkl"
     # Guardar los mapeos de frecuencia en un archivo .pkl
     with open(encoder_path, 'wb') as file:
         pickle.dump(freq_mappings, file)
